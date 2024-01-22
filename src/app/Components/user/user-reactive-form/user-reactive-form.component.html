@@ -1,0 +1,86 @@
+<!-- <p>user-reactive-form works!</p> -->
+
+
+<form class="column g-3 mt-3" [formGroup]="userForm">
+  <div class="col-md-4">
+    <label for="validationCustom01" class="form-label">First name</label>
+
+    <!-- <input type="text" class="form-control" name="firstName" id="validationCustom01" value=""
+     formControlName="firstName" [ngClass]="{'is-invalid':userForm.get('firstName')?.touched ||
+     userForm.get('firstName')?.dirty && userForm.get('firstName')?.invalid}">
+  </div> -->
+
+  <input type="text" class="form-control" name="firstName" id="validationCustom01" value=""
+  formControlName="firstName" [ngClass]="{'is-invalid':(firstName?.touched ||
+  firstName?.dirty) && firstName?.invalid}">
+
+  <span class="invalid-feedback">
+
+    <span *ngIf="firstName?.errors?.['required']">please enter your first name</span>
+    <span *ngIf="firstName?.errors?.['minlength']">name must be longer than 3 characters</span>
+
+  </span>
+
+
+
+
+</div>
+
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Last name</label>
+    <input type="text" class="form-control" name="lastName" id="validationCustom02" value=""
+    formControlName="lastName" [ngClass]="{'is-invalid':(lastName?.touched ||
+    lastName?.dirty) && lastName?.invalid}">
+
+    <span class="invalid-feedback">
+
+      <span *ngIf="lastName?.errors?.['required']">please enter your last name</span>
+      <span *ngIf="lastName?.errors?.['minlength']">name must be longer than 3 characters</span>
+
+    </span>
+
+
+
+
+  </div>
+
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" id="validationCustom02" value=""
+    formControlName="email" [ngClass]="{'is-invalid':(email?.touched ||
+    email?.dirty) && email?.invalid}">
+
+    <span class="invalid-feedback">
+
+      <span *ngIf="email?.errors?.['required']">please enter your Email</span>
+      <span *ngIf="email?.errors?.['pattern']">Email match the required formate</span>
+
+    </span>
+
+  </div>
+
+
+  Address:
+  <div formArrayName="address">
+    <div *ngFor="let add of address.controls;let i=index">
+      <div [formGroupName]="i">
+        city name:
+        <input type="text" formControlName="city">
+        street:
+        <input type="text" formControlName="street">
+        <button class="btn btn-danger" (click)="removeAddress(i)">remove</button>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="button" (click)="addAddress()">Add Address</button>
+
+
+
+  <div class="col-12 mt-3">
+    <button class="btn btn-success" type="submit">Submit form</button>
+  </div>
+</form>
+
+
+
+<h3>{{userForm.value | json}}</h3>

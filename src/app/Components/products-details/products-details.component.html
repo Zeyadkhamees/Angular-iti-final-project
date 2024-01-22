@@ -1,0 +1,53 @@
+<div class="container">
+
+
+  <div class="col-md-5 mx-auto m-4">
+    <div class="small fw-light p-2"><h5>Search with Material :</h5></div>
+    <div class="input-group">
+      <input class="form-control border-end-0 border rounded-pill me-2" type="text" id="example-search-input" #searchVal>
+      <span class="input-group-append">
+        <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill ms-n5" type="button"
+          (click)="searchProductsByMaterial(searchVal.value)"> <i class="bi bi-search"></i>
+        </button>
+      </span>
+    </div>
+
+      <!-- day 7 -->
+    <button class="btn btn-primary" (click)="prevFunc()"
+     [disabled]="prdId==productsIDS[0]">Prev</button>
+    <button class="btn btn-primary" (click)="nextFunc()"
+     [disabled]="prdId==productsIDS[productsIDS.length - 1]">Next</button>
+
+  </div>
+
+
+
+
+
+
+  <ul>
+    <li *ngFor="let prd of prdsAfterSearch">{{prd.name}}</li>
+  </ul>
+
+
+
+
+  <div class="row">
+
+    <div class="col-sm-6">
+
+      <img [src]="product?.img">
+
+    </div>
+
+    <div class="col-sm-6"></div>
+    <h2>Product Details</h2>
+    <h3>Name: {{product?.name}}</h3>
+    <h4>Price: {{product?.price | currency}}</h4>
+
+
+  </div>
+</div>
+
+
+<button class="btn btn-primary" (click)="back()">Back</button>

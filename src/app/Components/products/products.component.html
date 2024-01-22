@@ -1,0 +1,108 @@
+<!-- <p>assignment number 1</p> -->
+<!-- <router-outlet></router-outlet> -->
+<!-- <h1>{{storeObj.name}}</h1>
+<img src="{{storeObj.logo}}" class="img-fluid"> -->
+
+
+
+<!-- <h2 *ngfor="let item of iProductObj">
+{{item}}
+</h2> -->
+<!-- <ul>
+  <li *ngfor="let item of iProductObj">{{item}}</li>
+</ul> -->
+
+
+<!-- <h2>{{iProductObj.id}}</h2>
+<h2>{{iProductObj.name}}</h2>
+<h2>{{iProductObj.quantity}}</h2>
+<h2>{{iProductObj.price}}</h2>
+<h2>{{iProductObj.cateogryId}}</h2>
+<img src="{{iProductObj.img}}" class="img-fluid"> -->
+
+
+<!-- <p>assignment number 2</p> -->
+<div>
+  <img src="{{storeObj.logo}}" class="img-fluid" *ngIf="purchasedBefore == false; else thanks">
+
+    <!-- <div *ngIf="isPurshased == false">thanks</div> -->
+
+</div>
+<!-- <div *ngIf="isPurshased == true">thanks for purchasing</div> -->
+    <ng-template #thanks>Thanks for purchasing from our Store {{clientName}}</ng-template>
+
+    <h2>Purchase date :{{PurchaseDate|date:'fullDate'}}</h2>
+
+
+
+
+
+
+<div class="row">
+
+  <!-- <div class="row">
+
+    <div class="col-md-2">filter by:</div>
+
+
+    <div class="col-md-4"> <input type="text" class="form-control" [(ngModel)]="listFilter">
+
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-6"></div>
+    <h4>filter by value: {{listFilter}}</h4>
+  </div> -->
+
+
+     <div class="col-sm-4" *ngFor="let item of filteredPrd" (click)="prdDetails(item.id)"
+
+     [ngStyle]="{'background-color':(item.quantity <= 1)?'yellow':''}">
+
+
+    <img [src]="item.img" class="img-fluid" appBorderStyle>
+
+    <h4>Name: {{item.name}}</h4>
+    <h5>Price: {{item.price}}</h5>
+    <h5>Quantity: {{item.quantity}}</h5>
+
+    <ng-container [ngSwitch]="item.quantity">
+
+      <ng-container *ngSwitchCase="0">out of stock</ng-container>
+      <ng-container *ngSwitchCase="1">last item</ng-container>
+      <ng-container *ngSwitchCase="2">last two items</ng-container>
+
+    </ng-container>
+
+
+    <!-- <button class="btn btn-secondary" [disabled]="item.quantity==0" (click)="hideLogo()">Buy</button> -->
+
+    <div class="d-flex  justify-content-around">
+      <button (click)="decrease(item)" class="btn btn-primary" [disabled]="!item.quantity">
+        -
+      </button>
+      <h3>
+        {{ item.quantity}}
+      </h3>
+
+      <button (click)="increase(item)" class="btn btn-primary">
+        +
+      </button>
+      <button (click)="cartHandling(item)" class="btn btn-primary" [disabled]="!item.quantity">
+        {{item.isPurchased && item.quantity?'Remove From Cart':'Add To Cart'}}
+      </button>
+    </div>
+
+    <div class="bg-success m-2 p-4" [hidden]="!item.isPurchased || !item.quantity ">Added To Cart</div>
+
+
+  </div>
+
+</div>
+
+
+
+

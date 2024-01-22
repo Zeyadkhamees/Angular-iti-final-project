@@ -1,0 +1,77 @@
+
+
+  <div class="row">
+
+    <div class="col-md-2">filter by:</div>
+
+
+    <div class="col-md-4"> <input type="text" class="form-control" [(ngModel)]="listFilter" >
+      
+
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-6"></div>
+    <!-- <h4>filter by Price: {{listFilter}}</h4> -->
+    <h4>filter by Category: {{listFilter}}</h4>
+
+  </div>
+
+
+
+  <div class="container d-flex justify-content-between">
+    <input type="Categories" placeholder="choose category" [(ngModel)]="listFilter">
+
+    <select [(ngModel)]="listFilter">
+      <option value="1">Fantasy</option>
+      <option value="2">Animation</option>
+      <option value="3">Anime</option>
+    </select>
+  </div>
+
+
+
+  <table class="table container">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Price</th>
+        <th scope="col">Product Quantity</th>
+        <th scope="col">Credit Card</th>
+        <th scope="col">Total</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of ProductCart ">
+        <ng-container *ngIf="prod.quantity">
+          <th scope="row">
+            {{ prod.name }}
+          </th>
+          <th scope="row">
+            {{ prod.price }}
+          </th>
+          <th scope="row">
+            {{ prod.quantity }}
+          </th>
+          <th scope="row">
+            {{ prod.creditCard | formate}}
+          </th>
+          <th scope="row">
+            {{ prod.quantity * prod.price | currency}}
+          </th>
+        </ng-container>
+
+      </tr>
+    </tbody>
+    </table>
+
+
+
+
+
+
+<app-products [listFilterChild]="listFilter" (CartProducts)="addToCart($event)"></app-products>
